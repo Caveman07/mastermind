@@ -45,15 +45,16 @@ class Mastermind
 		# puts guess
 		# puts @@code
 		guess.each_with_index do |peg, index|
-			if guess[index] == @@code[index]
-				puts guess[index]
-				puts @@code[index]
-				feedback << "red"
-			elsif @@code.include?(peg)
-				feedback << "white"
-			else
-			    feedback << " "
+			if @@code.index(guess[index])
+				   if guess[index] == @@code[index]
+				   	feedback << "red"
+				   else
+				   	feedback << "white"
+				   end
+			else 
+				feedback << " "
 			end
+			
 		end	
 		@@feedbacks << feedback
 
@@ -106,10 +107,9 @@ class Mastermind
 			
 				puts "Computer guess number #{guessnumber}"
 				#computer is trying to randomly guess colors first
-				k = []
-				k << @@availablecolors.sample(4)
+				k = @@availablecolors.sample(4)
 				@@guesses << k
-				puts k.join(", ")
+				# puts k.join(", ")
 				# puts "Your code is #{@@code.join(", ")}"
 				feedback(k)
 			    if @@code == k
